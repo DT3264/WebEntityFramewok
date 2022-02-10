@@ -13,6 +13,10 @@ public static class Extensions
                 {
                     DbInitializer.Initialize(context);
                 }
+                else{
+                    // En caso de que inicie después de la 1ra vez sin datos
+                    DbInitializer.Initialize(context);
+                }
             }
         }
     }

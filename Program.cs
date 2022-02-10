@@ -9,14 +9,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add the PizzaContext
-// builder.Services.AddSqlite<PizzaContext>("Data Source=ContosoPizza.db");
-var conn = "server=localhost;port=3306;database=PizzaDB;uid=root;password=0000";
-
-builder.Services.AddEntityFrameworkMySql().AddDbContext<PizzaContext>(
-    o => o.UseMySQL(conn)
+var connectionString = "server=localhost;port=3306;database=PizzaDB;uid=root;password=0000";
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 26));
+builder.Services.AddDbContext<PizzaContext>(
+    dbContextOptions => dbContextOptions
+        .UseMySql(connectionString, serverVersion)
 );
-// Add the PromotionsContext
 
 builder.Services.AddScoped<PizzaService>();
 
@@ -35,7 +33,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Add the CreateDbInNotExists method call
 app.CreateDbIfNotExists();
 
 app.Run();
