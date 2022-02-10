@@ -6,8 +6,6 @@ public class Pizza
 {
     public int Id { get; set; }
 
-    [Required]
-    [MaxLength(100)]
     public string? Name { get; set; }
 
     public Sauce? Sauce { get; set; }

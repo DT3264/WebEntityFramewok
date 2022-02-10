@@ -7,12 +7,12 @@ namespace ContosoPizza.Data
         public static void Initialize(PizzaContext context)
         {
 
-            // if (context.Pizzas.Any()
-            //     && context.Toppings.Any()
-            //     && context.Sauces.Any())
-            // {
-            //     return;   // DB has been seeded
-            // }
+            if (context.Pizzas.Any()
+                && context.Toppings.Any()
+                && context.Sauces.Any())
+            {
+                return;   // DB has been seeded
+            }
 
             var pepperoniTopping = new Topping { Name = "Pepperoni", Calories = 130 };
             var sausageTopping = new Topping { Name = "Sausage", Calories = 100 };
@@ -55,11 +55,8 @@ namespace ContosoPizza.Data
                             {
                                 chickenTopping
                             }
-                        }
+                    }
             };
-
-            Console.WriteLine("Agregando pizzas");
-            Console.WriteLine(pizzas);
 
             context.Pizzas.AddRange(pizzas);
             context.SaveChanges();
